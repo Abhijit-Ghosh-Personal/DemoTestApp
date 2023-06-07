@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -14,7 +15,9 @@ import com.demotestapplication.databinding.FragmentApplicationBinding
 import com.demotestapplication.model.App
 import com.demotestapplication.model.AppListResponse
 import com.demotestapplication.utils.ProgressDialog
+import com.demotestapplication.utils.hide
 import com.demotestapplication.utils.hideKeyboard
+import com.demotestapplication.utils.show
 import com.demotestapplication.viewmodels.ApplicationViewModel
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -40,18 +43,35 @@ class ApplicationFragment : Fragment() {
     }
 
     private fun eventListener() {
-
-
-
         binding.ivSearch.setOnClickListener {
-            val searchList = arrayList.filter { it.app_name == binding.etSearch.text.toString()}
-            recyclerViewAdapter.updateData(searchList as ArrayList<App>)
-            hideKeyboard()
+            if(binding.etSearch.text.trim().toString().isNotEmpty()){
+                val searchList = arrayList.filter { it.app_name.contains(binding.etSearch.text.trim().toString(),ignoreCase = true)}
+                println("COUNT : "+searchList.size)
+                recyclerViewAdapter.updateData(searchList as ArrayList<App>)
+                hideKeyboard()
+                binding.ivSearch.hide()
+                binding.ivClose.show()
+                if(searchList.isEmpty()){
+                    Toast.makeText(requireContext(), "No application found", Toast.LENGTH_SHORT).show()
+                }
+            }else{
+                Toast.makeText(requireContext(), "Please type application name", Toast.LENGTH_SHORT).show()
+            }
+
+        }
+
+        binding.ivClose.setOnClickListener {
+            binding.etSearch.text.clear()
+            fetchServerData()
+            binding.ivSearch.show()
+            binding.ivClose.hide()
         }
 
         applicationViewModel.getRecyclerObserver().observe(viewLifecycleOwner, Observer<AppListResponse> { response ->
             progressDialg.dismissDialog()
             if(response != null){
+                binding.ivSearch.show()
+                binding.ivClose.hide()
                 binding.etSearch.text.clear()
                 arrayList = ArrayList()
                 arrayList.addAll(response.data.app_list)

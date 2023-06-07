@@ -16,27 +16,45 @@
         app:layout_constraintTop_toTopOf="parent"
         card_view:cardBackgroundColor="@color/white"
         card_view:cardCornerRadius="10dp"
-        card_view:cardElevation="3dp"
+        card_view:cardElevation="2dp"
         android:foreground="?android:attr/selectableItemBackground"
         android:clickable="true"
         card_view:cardPreventCornerOverlap="false"
-        card_view:cardUseCompatPadding="true">
+        card_view:cardUseCompatPadding="true"
+        android:focusable="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp">
+            android:padding="5dp">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/profile_image"
-                android:layout_width="96dp"
-                android:layout_height="96dp"
-                android:layout_marginTop="10dp"
-                android:src="@drawable/baseline_person_24"
-                app:civ_border_color="#FFFFFF"
-                app:civ_border_width="2dp"
+            <androidx.cardview.widget.CardView
+               android:id="@+id/cardViewImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                card_view:cardBackgroundColor="@color/white"
+                card_view:cardCornerRadius="10dp"
+                card_view:cardElevation="1dp"
+                card_view:cardPreventCornerOverlap="false"
+                card_view:cardUseCompatPadding="true">
+
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:id="@+id/profile_image"
+                    android:layout_width="96dp"
+                    android:layout_height="96dp"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitCenter"
+                    android:background="@color/white"
+                    android:visibility="visible"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_goneMarginTop="10dp"
+                    app:riv_corner_radius="10dip"
+                    app:riv_mutate_background="true" />
+
+            </androidx.cardview.widget.CardView>
 
             <TextView
                 android:id="@+id/tvName"
@@ -45,19 +63,19 @@
                 android:layout_marginStart="10dp"
                 android:textColor="@color/black"
                 android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="@+id/profile_image"
+                app:layout_constraintBottom_toBottomOf="@+id/cardViewImage"
                 app:layout_constraintEnd_toStartOf="@+id/switchapp"
-                app:layout_constraintStart_toEndOf="@+id/profile_image"
-                app:layout_constraintTop_toTopOf="@+id/profile_image"
+                app:layout_constraintStart_toEndOf="@+id/cardViewImage"
+                app:layout_constraintTop_toTopOf="@+id/cardViewImage"
                 tools:text="Application" />
 
             <Switch
                 android:id="@+id/switchapp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="@+id/profile_image"
+                app:layout_constraintBottom_toBottomOf="@+id/cardViewImage"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/profile_image"
+                app:layout_constraintTop_toTopOf="@+id/cardViewImage"
                 tools:ignore="UseSwitchCompatOrMaterialXml" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

@@ -21,7 +21,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initial() {
-
         binding.tabLayout.addTab(
             binding.tabLayout.newTab().setText("Application")
         )

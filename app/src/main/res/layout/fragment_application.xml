@@ -26,6 +26,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:padding="10dp"
+                android:hint="Type application name"
+                android:inputType="textCapWords"
                 android:imeOptions="actionDone"
                 android:background="@color/transparent"/>
 
@@ -36,6 +38,15 @@
                 android:layout_marginHorizontal="10dp"
                 android:layout_gravity="center_vertical"
                 android:src="@drawable/baseline_search_24"/>
+
+            <ImageView
+                android:id="@+id/ivClose"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:visibility="gone"
+                android:layout_marginHorizontal="10dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/baseline_close_24"/>
 
 
         </LinearLayout>

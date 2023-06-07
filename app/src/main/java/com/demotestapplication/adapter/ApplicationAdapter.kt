@@ -24,7 +24,7 @@ class ApplicationAdapter : RecyclerView.Adapter<ApplicationAdapter.MyViewHolder>
         val status = view.findViewById<Switch>(R.id.switchapp)
         fun bind(data : App){
             tvName.text = data.app_name
-            status.isChecked = data.status == "Active"
+            status.isChecked = data.status.equals("Active", ignoreCase = true)
             Glide.with(itemView.context)
                 .load(data.app_icon)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
